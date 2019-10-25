@@ -5,10 +5,14 @@
       <vl-layer-tile id="osm">
           <vl-source-osm></vl-source-osm>
       </vl-layer-tile>
+      <vl-layer-tile>
+          <vl-source-xyz :url="baseLayerUrl"></vl-source-xyz>
+      </vl-layer-tile>
   </vl-map>
 </template>
 
 <script>
+
   export default {
     data () {
       return { 
@@ -17,5 +21,10 @@
         rotation: 0,
       }
     },
+    computed: {
+      baseLayerUrl() {
+        return 'http://localhost:9090/z/x/y.png'
+      }
+    }
   }
 </script>
