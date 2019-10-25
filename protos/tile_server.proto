@@ -8,9 +8,10 @@ service TileServer {
 }
 
 message TileXYZ {
-  int32 x = 1;
-  int32 y = 2;
-  int32 z = 3;
+  string tiff_path = 1;
+  int32 x = 2;
+  int32 y = 3;
+  int32 z = 4;
 }
 
 message Tile {
