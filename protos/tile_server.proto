@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+service TileServer {
+
+  // Simple RPC
+  // Obtains the tile at a given tile xyz
+  rpc GetTile(TileXYZ) returns (Tile) {}
+}
+
+message TileXYZ {
+  int32 x = 1;
+  int32 y = 2;
+  int32 z = 3;
+}
+
+message Tile {
+  // Returns a tile as bytes
+  bytes tile = 1;
+}
