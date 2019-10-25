@@ -1,16 +1,19 @@
 from concurrent import futures
 import logging
 
+
 import grpc
 from rio_tiler import main
 from rio_tiler.utils import array_to_image
 
+import tile_server_pb2
 import tile_server_pb2_grpc
 
 
 def get_tile(path, x, y, z):
     tile, mask = main.tile(path, x, y, z, tilesize=256)
-    return array_to_image(tile, mask=mask)
+    buffer = array_to_image(tile, mask=mask)
+    return tile_server_pb2.Tile(tile=buffer)
 
 
 class TileServerServicer(tile_server_pb2_grpc.TileServerServicer):
