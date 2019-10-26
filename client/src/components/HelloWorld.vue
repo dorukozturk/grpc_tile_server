@@ -22,8 +22,8 @@
       }
     },
     computed: {
-      baseLayerUrl() {
-        return 'http://localhost:9090/z/x/y.png'
+      baseLayerUrl(e) {
+        return `http://localhost:9090/${z}/${x}/${y}.png`
       }
     }
   }

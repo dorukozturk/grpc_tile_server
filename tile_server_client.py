@@ -1,23 +1,27 @@
 import logging
 
 import grpc
+from flask import Flask
 
 import tile_server_pb2
 import tile_server_pb2_grpc
 
 
-def cog_get_tile(stub):
+app = Flask(__name__)
+
+
+def cog_get_tile(stub, x, y, z):
     TileXYZ = tile_server_pb2.TileXYZ(tiff_path="/data/data/cog/test.tif",
-                                      x=38324, y=22089, z=16)
+                                      x=x, y=y, z=z)
     return stub.GetTile(TileXYZ)
 
 
-def run():
+@app.route('/<int:z>/<int:x>/<int:y>')
+def serve_tiles(z, x, y):
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = tile_server_pb2_grpc.TileServerStub(channel)
-        cog_get_tile(stub)
+        cog_get_tile(stub, x, y, z)
 
 
 if __name__ == '__main__':
     logging.basicConfig()
-    run()
