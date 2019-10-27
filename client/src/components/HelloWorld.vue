@@ -6,7 +6,7 @@
           <vl-source-osm></vl-source-osm>
       </vl-layer-tile>
       <vl-layer-tile>
-          <vl-source-xyz :url="baseLayerUrl"></vl-source-xyz>
+          <vl-source-xyz url="http://anka:9090/{z}/{x}/{y}.png"></vl-source-xyz>
       </vl-layer-tile>
   </vl-map>
 </template>
@@ -16,14 +16,9 @@
   export default {
     data () {
       return { 
-        zoom: 2,
+        zoom: 0,
         center: [0, 0],
-        rotation: 0,
-      }
-    },
-    computed: {
-      baseLayerUrl(e) {
-        return `http://localhost:9090/${z}/${x}/${y}.png`
+        rotation: 0
       }
     }
   }

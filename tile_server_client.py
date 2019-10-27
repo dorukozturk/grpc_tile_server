@@ -16,11 +16,11 @@ def cog_get_tile(stub, x, y, z):
     return stub.GetTile(TileXYZ)
 
 
-@app.route('/<int:z>/<int:x>/<int:y>')
+@app.route('/<int:z>/<int:x>/<int:y>.png')
 def serve_tiles(z, x, y):
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = tile_server_pb2_grpc.TileServerStub(channel)
-        cog_get_tile(stub, x, y, z)
+        return cog_get_tile(stub, x, y, z).tile
 
 
 if __name__ == '__main__':
