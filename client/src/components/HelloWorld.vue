@@ -6,7 +6,7 @@
           <vl-source-osm></vl-source-osm>
       </vl-layer-tile>
       <vl-layer-tile>
-          <vl-source-xyz url="http://anka:9090/{z}/{x}/{y}.png"></vl-source-xyz>
+          <vl-source-xyz url="http://localhost:8091/{z}/{x}/{y}.png"></vl-source-xyz>
       </vl-layer-tile>
   </vl-map>
 </template>

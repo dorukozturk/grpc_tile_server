@@ -1,0 +1,28 @@
+version: '3'
+services:
+  grpc:
+    build:
+      context: ../
+      dockerfile: docker/grpc.Dockerfile
+    volumes:
+      - ../data:/data
+
+  client:
+    build:
+      context: ../
+      dockerfile: docker/client.Dockerfile
+    volumes:
+      - ../data:/data
+    depends_on:
+      - grpc
+    ports:
+      - "8091:80"
+
+  gui:
+    build:
+      context: ../
+      dockerfile: docker/gui.Dockerfile
+    depends_on:
+      - client
+    ports:
+      - "8090:80"

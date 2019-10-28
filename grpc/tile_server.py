@@ -1,6 +1,6 @@
 from concurrent import futures
 import logging
-
+import time
 
 import grpc
 from rio_tiler import main
@@ -30,7 +30,11 @@ def serve():
         TileServerServicer(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
-    server.wait_for_termination()
+    try:
+        while True:
+            time.sleep(86400)
+    except KeyboardInterrupt:
+        server.stop(0)
 
 
 if __name__ == '__main__':
